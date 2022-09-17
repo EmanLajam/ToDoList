@@ -31,23 +31,28 @@ if(localStorage.task != null){
 }
 
 
-AddBtn.onclick = function(){
-     let newTask = {
-        text:input.value,
-        checked: false,
-        id:Date.now(),
-     }
+document.getElementById("form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  let newTask = {
+    text:input.value,
+    checked: false,
+    id:Date.now(),
+ }
 
-    if(input.value == ""){
-        error.innerHTML = 'must not null';
+if(input.value == ""){
+    error.innerHTML = 'must not null';
+
+ }else{
+    ListItems.push(newTask);
+localStorage.setItem('task', JSON.stringify(ListItems))
+console.log(ListItems)
+ }
+showData();
+
+});
+
     
-     }else{
-        ListItems.push(newTask);
-    localStorage.setItem('task', JSON.stringify(ListItems))
-    console.log(ListItems)
-     }
-    showData();
-}
+    
 
 function showData(){
 
@@ -55,7 +60,6 @@ function showData(){
     for(let i = 0 ; i< ListItems.length; i++){
         
     list += `
-    <ul>
     <li
     class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
     <div class="d-flex align-items-center">
@@ -66,8 +70,9 @@ function showData(){
       <i class="fas fa-times text-primary"></i>
     </a>
   </li>
-        </ul>
     `;
     }
     document.getElementById('list').innerHTML = list;
+
+    console.log(localStorage);
 }

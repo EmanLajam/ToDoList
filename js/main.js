@@ -48,6 +48,7 @@ localStorage.setItem('task', JSON.stringify(ListItems))
 console.log(ListItems)
  }
 showData();
+clearData();
 
 });
 
@@ -75,4 +76,8 @@ function showData(){
     document.getElementById('list').innerHTML = list;
 
     console.log(localStorage);
+}
+
+function clearData(){
+  input.value = '';
 }

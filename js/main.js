@@ -36,7 +36,7 @@ document.getElementById("form").addEventListener("submit", (e) => {
   e.preventDefault();
   let newTask = {
     text: input.value,
-    checked: false,
+    checked: "unchecked",
     id: Date.now(),
   }
 
@@ -53,24 +53,22 @@ document.getElementById("form").addEventListener("submit", (e) => {
 });
 
 
-// function completTask(){
+
 $('body').on( 'click','.checkbox',function (e) {
   let taskId = (e.target.id);
   ListItems.forEach((element, index) => {
     
     if (element.id == taskId) {
       if ($(`#${taskId}`).is(':checked'))  {
-        ListItems[index].checked = true;
+        ListItems[index].checked = "checked";
       }else{
-        ListItems[index].checked = false;
-      }
-      
+        ListItems[index].checked = "unchecked";
+      } 
     }
   })
   localStorage.setItem('task', JSON.stringify(ListItems))
- 
 });
-// }
+
 
 function showData() {
 
@@ -81,11 +79,11 @@ function showData() {
     <li
     class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
     <div class="d-flex align-items-center">
-      <input id="${ListItems[i].id}" class=" checkbox form-check-input me-2" type="checkbox" value="" aria-label="..." />
+      <input id="${ListItems[i].id}" ${ListItems[i].checked} class=" checkbox form-check-input me-2" type="checkbox" value="" aria-label="..." />
       <div>${ListItems[i].text}</div>
       <div>${time}</div>
     </div>
-  
+
     <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
     <i class="fa-regular fa-pen-to-square"></i>
       <i class="fas fa-times text-primary"></i>
@@ -95,8 +93,8 @@ function showData() {
 
   }
 
+
   document.getElementById('list').innerHTML = list;
   document.getElementById('input').value = "";
-
   console.log(localStorage);
 }
